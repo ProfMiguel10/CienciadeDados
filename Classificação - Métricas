@@ -1,0 +1,42 @@
+package cienciadedados;
+import java.util.Scanner;
+public class Classificacao {
+	// Acurácia
+	public static double calcularAcuracia(int VP, int VN, int FP, int FN) {
+		return (double) (VP + VN) / (VP + VN + FP + FN);
+	}
+	// Precisão
+	public static double calcularPrecisao(int VP, int FP) {
+		if (VP + FP == 0) return 0;
+		return (double) VP / (VP + FP);
+	}
+	// Sensibilidade (Revocação)
+	public static double calcularSensibilidade(int VP, int FN) {
+		if (VP + FN == 0) return 0;
+		return (double) VP / (VP + FN);
+	}
+	// F1-Score
+	public static double calcularF1Score(double precisao, double sensibilidade) {
+		if (precisao + sensibilidade == 0) return 0; 
+		return 2 * (precisao * sensibilidade) / (precisao + sensibilidade);
+	}
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("Informe o valor de Verdadeiros Positivos (VP): ");
+		int VP = scanner.nextInt();
+		System.out.print("Informe o valor de Verdadeiros Negativos (VN): ");
+		int VN = scanner.nextInt();
+		System.out.print("Informe o valor de Falsos Positivos (FP): ");
+		int FP = scanner.nextInt();
+		System.out.print("Informe o valor de Falsos Negativos (FN): ");
+		int FN = scanner.nextInt();
+		double acuracia = calcularAcuracia(VP, VN, FP, FN);
+		double precisao = calcularPrecisao(VP, FP);
+		double sensibilidade = calcularSensibilidade(VP, FN);
+		double f1Score = calcularF1Score(precisao, sensibilidade);
+		System.out.println("Acurácia: " + acuracia);
+		System.out.println("Precisão: " + precisao);
+		System.out.println("Sensibilidade (Revocação): " + sensibilidade);
+		System.out.println("F1-Score: " + f1Score);
+	}
+}
